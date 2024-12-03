@@ -116,7 +116,7 @@ function init() {
     const geometry = BufferGeometryUtils.mergeGeometries(geometries);
     geometry.computeBoundingSphere();
 
-    const texture = new THREE.TextureLoader().load('./atlas.png');
+    const texture = new THREE.TextureLoader().load('./assets/atlas.png');
     texture.colorSpace = THREE.SRGBColorSpace;
     texture.magFilter = THREE.NearestFilter;
 
