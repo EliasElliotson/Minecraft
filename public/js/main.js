@@ -1,12 +1,8 @@
 import * as THREE from 'three';
 
-import Stats from 'three/addons/libs/stats.module.js';
-
 import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
 import { ImprovedNoise } from 'three/addons/math/ImprovedNoise.js';
 import * as BufferGeometryUtils from 'three/addons/utils/BufferGeometryUtils.js';
-
-let container, stats;
 
 let camera, controls, scene, renderer;
 
@@ -20,9 +16,6 @@ const clock = new THREE.Clock();
 init();
 
 function init() {
-
-    container = document.getElementById('container');
-
     camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 20000);
     camera.position.y = getY(worldHalfWidth, worldHalfDepth) * 100 + 100;
 
@@ -134,16 +127,13 @@ function init() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setAnimationLoop(animate);
-    container.appendChild(renderer.domElement);
+    document.body.appendChild(renderer.domElement);
 
     controls = new FirstPersonControls(camera, renderer.domElement);
 
     controls.movementSpeed = 1000;
     controls.lookSpeed = 0.125;
     controls.lookVertical = true;
-
-    stats = new Stats();
-    container.appendChild(stats.dom);
 
     //
 
@@ -195,13 +185,8 @@ function getY(x, z) {
 
 }
 
-//
-
 function animate() {
-
     render();
-    stats.update();
-
 }
 
 function render() {
