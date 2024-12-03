@@ -1,6 +1,9 @@
-# Basic Vite Template
+# Minecraft
 
-This template should provide you with the basics you need to get started with your Vite project.  It comes with a live preview, an build script, and automatic GitHub pages deployment.
+This is not Minecraft.
+
+## Docs
+ - [Maps](./docs/maps.md)
 
 ## Scripts
 
