@@ -37,6 +37,8 @@ jobs:
         run: cd public && npm i && cd ..
       - name: Build app
         run: npm run build
+      - name: Clone assets
+        run: cp -r ./public/assets/ ./build/assets/
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
