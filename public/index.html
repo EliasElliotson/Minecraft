@@ -1,12 +1,30 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - geometry - minecraft</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+		<style>
+			body {
+        margin: 0px;
+        overflow: hidden;
+			}
+		</style>
+	</head>
+	<body>
 
-<head>
-  <title>My Vite project</title>
-</head>
+		<div id="container"></div>
 
-<body>
-  <h1>Hello, world!</h1>
-</body>
+		<script type="importmap">
+			{
+				"imports": {
+					"three": "../build/three.module.js",
+					"three/addons/": "./jsm/"
+				}
+			}
+		</script>
 
+		<script type="module" src="./js/main.js"></script>
+
+	</body>
 </html>
