@@ -1,0 +1,16 @@
+{
+  "id": "material_id", // The id of the material.
+  "type": "material_type", // Which Three.js material to use.  Options are: basic, depth, lambert, matcap, normal, phong, physical, standard, and toon.
+  "material_properties": {}, // Configuration for the Three.js material.  Parameters may vary.  See the Three.js documentation.
+  "external": "is_external", // Whether or not the material is from an external source.  If so, the maps will be loaded via a cors proxy and must be verified before it can be displayed on child accounts.
+  "maps": {
+    "alpha": "map_path", // Path to the alpha map.  Omit property if the material has no alpha map.
+    "bump": "map_path", // Path to the bump map.  Omit property if the material has no bump map.
+    "diffuse": "map_path", // Path to the diffuse map.  Omit property if the material has no diffuse map.
+    "emissive": "map_path", // Path to the emissive map.  Omit property if the material has no emissive map.
+    "environment": "map_path", // Path to the environment map.  Omit property if the material has no environment map.
+    "normal": "map_path", // Path to the normal map.  Omit property if the material has no normal map.
+    "occlusion": "map_path",  // Path to the ambient occlusion map.  Omit property if the material has no ambient occlusion map.
+    "specular": "map_path" // Path to the specular map.  Omit property if the material has no specular map.
+  }
+}

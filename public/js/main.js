@@ -1,3 +1,13 @@
+import { MaterialManager } from './material/MaterialManager.js';
+
+const materialManager = new MaterialManager();
+const materialsConfig = await fetch("./assets/materials.json");
+const materials = await materialsConfig.json();
+
+for (const material of materials) {
+    materialManager.addMaterial(material);
+}
+
 import * as THREE from 'three';
 
 import { FirstPersonControls } from 'three/addons/controls/FirstPersonControls.js';
@@ -27,31 +37,21 @@ function init() {
     const matrix = new THREE.Matrix4();
 
     const pxGeometry = new THREE.PlaneGeometry(100, 100);
-    pxGeometry.attributes.uv.array[1] = 0.5;
-    pxGeometry.attributes.uv.array[3] = 0.5;
     pxGeometry.rotateY(Math.PI / 2);
     pxGeometry.translate(50, 0, 0);
 
     const nxGeometry = new THREE.PlaneGeometry(100, 100);
-    nxGeometry.attributes.uv.array[1] = 0.5;
-    nxGeometry.attributes.uv.array[3] = 0.5;
     nxGeometry.rotateY(- Math.PI / 2);
     nxGeometry.translate(- 50, 0, 0);
 
     const pyGeometry = new THREE.PlaneGeometry(100, 100);
-    pyGeometry.attributes.uv.array[5] = 0.5;
-    pyGeometry.attributes.uv.array[7] = 0.5;
     pyGeometry.rotateX(- Math.PI / 2);
     pyGeometry.translate(0, 50, 0);
 
     const pzGeometry = new THREE.PlaneGeometry(100, 100);
-    pzGeometry.attributes.uv.array[1] = 0.5;
-    pzGeometry.attributes.uv.array[3] = 0.5;
     pzGeometry.translate(0, 0, 50);
 
     const nzGeometry = new THREE.PlaneGeometry(100, 100);
-    nzGeometry.attributes.uv.array[1] = 0.5;
-    nzGeometry.attributes.uv.array[3] = 0.5;
     nzGeometry.rotateY(Math.PI);
     nzGeometry.translate(0, 0, - 50);
 
@@ -109,11 +109,11 @@ function init() {
     const geometry = BufferGeometryUtils.mergeGeometries(geometries);
     geometry.computeBoundingSphere();
 
-    const texture = new THREE.TextureLoader().load('./assets/atlas.png');
-    texture.colorSpace = THREE.SRGBColorSpace;
-    texture.magFilter = THREE.NearestFilter;
+    const texture = new THREE.TextureLoader().load('./assets/textures/granite/diffuse.png');
+    
+    //materialManager.getMaterial("granite").map
 
-    const mesh = new THREE.Mesh(geometry, new THREE.MeshLambertMaterial({ map: texture, side: THREE.FrontSide }));
+    const mesh = new THREE.Mesh(geometry, materialManager.getMaterial("granite"));
     scene.add(mesh);
 
     const ambientLight = new THREE.AmbientLight(0xeeeeee, 3);

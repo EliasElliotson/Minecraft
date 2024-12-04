@@ -1,0 +1,18 @@
+[
+  {
+    "id": "granite",
+    "type": "standard",
+    "material_properties": {},
+    "external": false,
+    "maps": {
+      "alpha": "assets/textures/granite/alpha.png",
+      "bump": "assets/textures/granite/bump.png",
+      "diffuse": "assets/textures/granite/diffuse.png",
+      "emissive": "assets/textures/granite/emissive.png",
+      "environment": "assets/textures/granite/environment.png",
+      "normal": "assets/textures/granite/normal.png",
+      "occlusion": "assets/textures/granite/occlusion.png",
+      "specular": "assets/textures/granite/specular.png"
+    }
+  }
+]
