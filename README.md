@@ -2,9 +2,6 @@
 
 This is not Minecraft.
 
-## Docs
- - [Maps](./docs/maps.md)
-
 ## Scripts
 
 There are a couple of scripts you can run to complete specific actions in the app, and they are listed below.
