@@ -11,6 +11,7 @@
     "environment": "map_path", // Path to the environment map.  Omit property if the material has no environment map.
     "normal": "map_path", // Path to the normal map.  Omit property if the material has no normal map.
     "occlusion": "map_path",  // Path to the ambient occlusion map.  Omit property if the material has no ambient occlusion map.
+    "roughness": "map_path",  // Path to the roughness map.  Omit property if the material has no roughness map.
     "specular": "map_path" // Path to the specular map.  Omit property if the material has no specular map.
   }
 }

@@ -2,7 +2,9 @@
   {
     "id": "granite",
     "type": "standard",
-    "material_properties": {},
+    "material_properties": {
+      "emissiveIntensity": 10
+    },
     "external": false,
     "maps": {
       "alpha": "assets/textures/granite/alpha.png",

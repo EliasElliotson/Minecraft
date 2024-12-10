@@ -48,6 +48,7 @@ export class MaterialManager {
     const environmentMap = this.loadTexture(config.maps.environment, config.external);
     const normalMap = this.loadTexture(config.maps.normal, config.external);
     const occlusionMap = this.loadTexture(config.maps.occlusion, config.external);
+    const roughnessMap = this.loadTexture(config.maps.roughness, config.external);
     const specularMap = this.loadTexture(config.maps.specular, config.external);
 
     if (alphaMap) materialConfig.alphaMap = alphaMap;
@@ -57,6 +58,7 @@ export class MaterialManager {
     if (environmentMap) materialConfig.envMap = environmentMap;
     if (normalMap) materialConfig.normalMap = normalMap;
     if (occlusionMap) materialConfig.aoMap = occlusionMap;
+    if (roughnessMap) materialConfig.roughnessMap = roughnessMap;
     if (specularMap) materialConfig.specularMap = specularMap;
 
     switch (config.type) {
