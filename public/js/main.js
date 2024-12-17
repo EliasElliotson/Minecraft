@@ -1,4 +1,5 @@
 import { MaterialManager } from './material/MaterialManager.js';
+import { GridMesh } from './gridMesh/GridMesh.js';
 
 const materialManager = new MaterialManager();
 const materialsConfig = await fetch("./assets/materials.json");
@@ -32,88 +33,23 @@ function init() {
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0xbfd1e5);
 
-    // sides
+    const gridMesh = new GridMesh();
 
-    const matrix = new THREE.Matrix4();
+    for (let i = 0; i < 100; i++) {
+        const pts = [];
+        const uvs = [];
 
-    const pxGeometry = new THREE.PlaneGeometry(100, 100);
-    pxGeometry.rotateY(Math.PI / 2);
-    pxGeometry.translate(50, 0, 0);
-
-    const nxGeometry = new THREE.PlaneGeometry(100, 100);
-    nxGeometry.rotateY(- Math.PI / 2);
-    nxGeometry.translate(- 50, 0, 0);
-
-    const pyGeometry = new THREE.PlaneGeometry(100, 100);
-    pyGeometry.rotateX(- Math.PI / 2);
-    pyGeometry.translate(0, 50, 0);
-
-    const pzGeometry = new THREE.PlaneGeometry(100, 100);
-    pzGeometry.translate(0, 0, 50);
-
-    const nzGeometry = new THREE.PlaneGeometry(100, 100);
-    nzGeometry.rotateY(Math.PI);
-    nzGeometry.translate(0, 0, - 50);
-
-    //
-
-    const geometries = [];
-
-    for (let z = 0; z < worldDepth; z++) {
-
-        for (let x = 0; x < worldWidth; x++) {
-
-            const h = getY(x, z);
-
-            matrix.makeTranslation(
-                x * 100 - worldHalfWidth * 100,
-                h * 100,
-                z * 100 - worldHalfDepth * 100
-            );
-
-            const px = getY(x + 1, z);
-            const nx = getY(x - 1, z);
-            const pz = getY(x, z + 1);
-            const nz = getY(x, z - 1);
-
-            geometries.push(pyGeometry.clone().applyMatrix4(matrix));
-
-            if ((px !== h && px !== h + 1) || x === 0) {
-
-                geometries.push(pxGeometry.clone().applyMatrix4(matrix));
-
-            }
-
-            if ((nx !== h && nx !== h + 1) || x === worldWidth - 1) {
-
-                geometries.push(nxGeometry.clone().applyMatrix4(matrix));
-
-            }
-
-            if ((pz !== h && pz !== h + 1) || z === worldDepth - 1) {
-
-                geometries.push(pzGeometry.clone().applyMatrix4(matrix));
-
-            }
-
-            if ((nz !== h && nz !== h + 1) || z === 0) {
-
-                geometries.push(nzGeometry.clone().applyMatrix4(matrix));
-
-            }
-
+        for (let j = 0; j < 3; j++) {
+            pts.push(new THREE.Vector3(Math.random() * 1000, Math.random() * 1000, Math.random() * 1000))
+            uvs.push(new THREE.Vector2(Math.random(), Math.random()));
         }
 
+        gridMesh.addFace(pts, uvs);
     }
 
-    const geometry = BufferGeometryUtils.mergeGeometries(geometries);
-    geometry.computeBoundingSphere();
+    console.log(gridMesh);
 
-    const texture = new THREE.TextureLoader().load('./assets/textures/granite/diffuse.png');
-    
-    //materialManager.getMaterial("granite").map
-
-    const mesh = new THREE.Mesh(geometry, materialManager.getMaterial("granite"));
+    const mesh = new THREE.Mesh(gridMesh.geometry, materialManager.getMaterial("granite"));
     scene.add(mesh);
 
     const ambientLight = new THREE.AmbientLight(0xeeeeee, 3);
@@ -135,10 +71,7 @@ function init() {
     controls.lookSpeed = 0.125;
     controls.lookVertical = true;
 
-    //
-
     window.addEventListener('resize', onWindowResize);
-
 }
 
 function onWindowResize() {
@@ -153,14 +86,12 @@ function onWindowResize() {
 }
 
 function generateHeight(width, height) {
-
     const data = [], perlin = new ImprovedNoise(),
         size = width * height, z = Math.random() * 100;
 
     let quality = 2;
 
     for (let j = 0; j < 4; j++) {
-
         if (j === 0) for (let i = 0; i < size; i++) data[i] = 0;
 
         for (let i = 0; i < size; i++) {
@@ -172,17 +103,13 @@ function generateHeight(width, height) {
         }
 
         quality *= 4;
-
     }
 
     return data;
-
 }
 
 function getY(x, z) {
-
     return (data[x + z * worldWidth] * 0.15) | 0;
-
 }
 
 function animate() {
@@ -190,8 +117,6 @@ function animate() {
 }
 
 function render() {
-
     controls.update(clock.getDelta());
     renderer.render(scene, camera);
-
 }
